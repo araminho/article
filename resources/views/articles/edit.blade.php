@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class='row'>
-        <h1>Create an article</h1>
+        <h1>Edit an article</h1>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -14,15 +14,16 @@
                 </ul>
             </div>
         @endif
-        <form method='POST' action={{route('articles.store')}}>
+        <form method='POST' action={{route('articles.update', $article->id)}}>
+            {{ method_field('PUT') }}
             @csrf
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="Enter title">
+                <input type="text" class="form-control" name="title" id="title" value="{{$article->title}}">
               </div>
               <div class="form-group">
                 <label for="content">Content</label>
-                <textarea name="content" id="content" class="form-control" placeholder="Enter content"></textarea>
+                <textarea name="content" id="content" class="form-control">{{$article->content}}</textarea>
               </div>
               <div class="form-group">
                 <a href="{{route('articles.index')}}">
